@@ -30,3 +30,11 @@ export interface ProductContentProps {
   totalPages: number;
   onPageChange: (page: number) => void;
 }
+
+export interface StarRatingProps {
+  rating: number;
+  maxStars?: number;
+  size?: "sm" | "md" | "lg";
+  showCount?: boolean;
+  count?: number;
+}

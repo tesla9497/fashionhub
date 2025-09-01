@@ -1,6 +1,7 @@
 import React from "react";
-import { Heart, Star } from "lucide-react";
+import { Heart } from "lucide-react";
 import { Button } from "../ui/button";
+import { StarRating } from "./StarRating";
 import { useShoppingLists } from "../../hooks/useShoppingLists";
 import { ProductCardProps } from "../../types";
 
@@ -15,32 +16,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const { toggleShortlist, toggleFavorites, isInShortlist, isInFavorites } =
     useShoppingLists();
 
-  const renderStars = (rate: number) => {
-    const stars = [];
-    const fullStars = Math.floor(rate);
-    const hasHalfStar = rate % 1 !== 0;
-
-    for (let i = 0; i < 5; i++) {
-      if (i < fullStars) {
-        stars.push(
-          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-        );
-      } else if (i === fullStars && hasHalfStar) {
-        stars.push(
-          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-        );
-      } else {
-        stars.push(<Star key={i} className="w-4 h-4 text-gray-300" />);
-      }
-    }
-    return stars;
-  };
-
   return (
     <div className="bg-[#F7F5F7] rounded-lg border border-gray-200 overflow-hidden transition-shadow duration-300">
       {/* Product Image Section */}
       <div className="relative bg-lavender-100 p-4">
-        <img src={image} alt={title} className="w-full h-48 object-contain" />
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-48 object-contain"
+          loading="lazy"
+          decoding="async"
+        />
 
         {/* Favorites Button */}
         <button
@@ -88,10 +74,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
               ₹{price.toFixed(2)}
             </span>
           </div>
-          <div className="flex items-center space-x-1">
-            {renderStars(rating.rate)}
-            <span className="text-xs text-gray-600 ml-1">({rating.count})</span>
-          </div>
+          <StarRating
+            rating={rating.rate}
+            showCount={true}
+            count={rating.count}
+            size="md"
+          />
         </div>
 
         {/* Action Buttons */}

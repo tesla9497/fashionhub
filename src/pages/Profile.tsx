@@ -100,6 +100,8 @@ export const Profile = () => {
                     src={currentUser.photoURL}
                     alt="Profile"
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
                   />
                 ) : (
                   <User className="w-12 h-12 text-gray-600" />

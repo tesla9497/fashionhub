@@ -23,7 +23,9 @@ export const Header = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const handleSignOut = async () => {
@@ -107,6 +109,8 @@ export const Header = () => {
                           src={currentUser.photoURL}
                           alt="Profile"
                           className="w-full h-full object-cover"
+                          loading="lazy"
+                          decoding="async"
                         />
                       ) : (
                         <User className="w-6 h-6 text-gray-600" />

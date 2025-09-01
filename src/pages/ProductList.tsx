@@ -149,8 +149,11 @@ const ProductList = () => {
       <div className="mb-4">
         <img
           src="/assets/banner_1.webp"
+          fetchPriority="high"
           alt="Fashion Hub Banner"
           className="w-full aspect-[3/1] object-contain rounded-lg"
+          loading="eager"
+          decoding="async"
         />
       </div>
 
