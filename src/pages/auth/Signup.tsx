@@ -220,6 +220,7 @@ const Signup = () => {
                   <Calendar
                     mode="single"
                     selected={date}
+                    captionLayout="dropdown"
                     onSelect={(selectedDate) => {
                       setDate(selectedDate);
                       if (selectedDate) {
