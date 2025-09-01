@@ -10,20 +10,29 @@ const Pagination: React.FC<PaginationProps> = ({
   // Pagination functions
   const goToPage = (page: number) => {
     onPageChange(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Scroll after a brief delay to ensure content has updated
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 100);
   };
 
   const goToNextPage = () => {
     if (currentPage < totalPages) {
       onPageChange(currentPage + 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Scroll after a brief delay to ensure content has updated
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 100);
     }
   };
 
   const goToPreviousPage = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Scroll after a brief delay to ensure content has updated
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 100);
     }
   };
 
@@ -83,9 +92,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <div className="flex items-center space-x-1">
         {getPageNumbers().map((page, index) => (
           <button
-            key={
-              typeof page === "number" ? `page-${page}` : `ellipsis-${index}`
-            }
+            key={index}
             onClick={() => typeof page === "number" && goToPage(page)}
             disabled={page === "..."}
             aria-label={

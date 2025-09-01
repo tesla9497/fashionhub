@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import ProductLoadingState from "../components/custom/ProductLoadingState";
 import ProductErrorState from "../components/custom/ProductErrorState";
 import ProductContent from "../components/custom/ProductContent";
@@ -70,22 +70,28 @@ const ProductList = () => {
   ];
 
   // Filter products based on debounced search and category
-  const filteredProducts = products.filter((product) => {
-    const matchesSearch =
-      product.title
-        .toLowerCase()
-        .includes(debouncedSearchQuery.toLowerCase()) ||
-      product.description
-        .toLowerCase()
-        .includes(debouncedSearchQuery.toLowerCase());
-    const matchesCategory =
-      selectedCategory === "all" || product.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) => {
+      const matchesSearch =
+        product.title
+          .toLowerCase()
+          .includes(debouncedSearchQuery.toLowerCase()) ||
+        product.description
+          .toLowerCase()
+          .includes(debouncedSearchQuery.toLowerCase());
+      const matchesCategory =
+        selectedCategory === "all" || product.category === selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [products, debouncedSearchQuery, selectedCategory]);
 
   // Update pagination when filters change
   useEffect(() => {
     setCurrentPage(1);
+  }, [debouncedSearchQuery, selectedCategory]);
+
+  // Update total pages when filtered products change
+  useEffect(() => {
     setTotalPages(Math.ceil(filteredProducts.length / productsPerPage));
   }, [filteredProducts, productsPerPage]);
 
