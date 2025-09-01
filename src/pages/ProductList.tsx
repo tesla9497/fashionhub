@@ -129,7 +129,10 @@ const ProductList = () => {
 
         {/* Category Filter */}
         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-          <SelectTrigger className="w-[180px] hidden md:block">
+          <SelectTrigger
+            aria-label="Select a category"
+            className="w-[180px] hidden md:flex"
+          >
             <SelectValue placeholder="Select a category" />
           </SelectTrigger>
           <SelectContent>
