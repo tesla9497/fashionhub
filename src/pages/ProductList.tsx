@@ -138,7 +138,7 @@ const ProductList = () => {
           <SelectContent>
             <SelectGroup>
               {categories.map((category) => (
-                <SelectItem value={category}>
+                <SelectItem key={category} value={category}>
                   {category === "all"
                     ? "All Categories"
                     : category.charAt(0).toUpperCase() + category.slice(1)}

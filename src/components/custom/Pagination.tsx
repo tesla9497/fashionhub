@@ -83,7 +83,9 @@ const Pagination: React.FC<PaginationProps> = ({
       <div className="flex items-center space-x-1">
         {getPageNumbers().map((page, index) => (
           <button
-            key={index}
+            key={
+              typeof page === "number" ? `page-${page}` : `ellipsis-${index}`
+            }
             onClick={() => typeof page === "number" && goToPage(page)}
             disabled={page === "..."}
             aria-label={
